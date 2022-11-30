@@ -1,9 +1,9 @@
 <template>
   <div class="login-panel flex items-center flex-col justify-around">
-    <h2 class="title text-slate-50 text-2xl">后台管理系统</h2>
+    <h2 class="title text-slate-50 text-2xl mb-5">后台管理系统</h2>
 
     <div class="tabs">
-      <el-tabs type="border-card" stretch class="w-[250px] rounded" v-model="activeName">
+      <el-tabs type="border-card" stretch class="w-[300px] rounded" v-model="activeName">
 
         <el-tab-pane label="账号登录" name="account">
           <template #label>
@@ -28,12 +28,12 @@
     </div>
 
     <div class="footer">
-      <div class="password flex items-center justify-between w-[250px]">
+      <div class="password flex items-center justify-between w-[300px]">
         <el-checkbox v-model="isRemPassword" label="记住密码" size="large" />
         <el-link type="primary">忘记密码</el-link>
 
       </div>
-      <el-button type="primary" class="w-[250px]" @click="handleLogin"
+      <el-button type="primary" class="w-[300px] mt-3" @click="handleLogin"
         >立即登录</el-button
       >
     </div>
@@ -67,7 +67,7 @@ const handleLogin = () => {
 <style scoped>
 .login-panel {
   width: 400px;
-  height: 300px;
+  height: 350px;
   /* border: 1px solid white; */
 }
 :deep(.el-checkbox__label){
