@@ -7,6 +7,7 @@ import router from './router'
 
 import './assets/main.css'
 import registerIcons from './global/register-icons'
+import 'element-plus/dist/index.css'
 
 const app = createApp(App)
 

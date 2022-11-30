@@ -3,14 +3,26 @@
     <h2 class="title text-slate-50 text-2xl">后台管理系统</h2>
 
     <div class="tabs">
-      <el-tabs type="border-card" stretch class="w-[250px] rounded">
-        <el-tab-pane label="账号登录">
-          <div>账号</div>
-          <div>密码</div>
+      <el-tabs type="border-card" stretch class="w-[250px] rounded" v-model="activeName">
+
+        <el-tab-pane label="账号登录" name="account">
+          <template #label>
+            <div class="flex items-center justify-around">
+              <el-icon><UserFilled /></el-icon>
+              <span>账号登录</span>
+            </div>
+          </template>
+          <PanelAccount ref="panelAccountRef" />
         </el-tab-pane>
-        <el-tab-pane label="手机登录">
-          <div>账号</div>
-          <div>密码</div>
+
+        <el-tab-pane label="手机登录" name="phone">
+          <template #label>
+            <div class="flex items-center justify-around">
+              <el-icon><Iphone /></el-icon>
+              <span>手机登录</span>
+            </div>
+          </template>
+          <PanelPhone />
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -32,13 +44,24 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const router = useRouter()
+import PanelAccount from "./PanelAccount.vue"
+import PanelPhone from "./PanelPhone.vue"
 
+const router = useRouter()
+const activeName = ref('account')
 const isRemPassword = ref(false)
 
+const panelAccountRef = ref<InstanceType<typeof PanelAccount>>()
+
+
 const onsubmit = () => {
-  console.log('登录成功')
-  router.push('/admin')
+  if (activeName.value === 'account') {
+    console.log('账号登录方式');
+    panelAccountRef.value?.accountLogin()
+  } else {
+    console.log('手机登录方式')
+  }
+  // router.push('/admin')
 }
 </script>
 
