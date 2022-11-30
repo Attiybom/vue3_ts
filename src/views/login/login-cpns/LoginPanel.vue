@@ -19,6 +19,7 @@
       <div class="password flex items-center justify-between w-[250px]">
         <el-checkbox v-model="isRemPassword" label="记住密码" size="large" />
         <el-link type="primary">忘记密码</el-link>
+
       </div>
       <el-button type="primary" class="w-[250px]" @click="onsubmit"
         >立即登录</el-button
