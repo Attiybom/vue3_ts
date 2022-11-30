@@ -1,11 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="login">login</div>
+  <div class="admin">
+    
+  </div>
 </template>
 
 <style scoped>
-.login{
+.admin{
 
 }
 </style>
