@@ -42,17 +42,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
 import PanelAccount from "./PanelAccount.vue"
 import PanelPhone from "./PanelPhone.vue"
 
-const router = useRouter()
 const activeName = ref('account')
 const isRemPassword = ref(false)
 
 const panelAccountRef = ref<InstanceType<typeof PanelAccount>>()
-
 
 const onsubmit = () => {
   if (activeName.value === 'account') {
@@ -61,7 +57,6 @@ const onsubmit = () => {
   } else {
     console.log('手机登录方式')
   }
-  // router.push('/admin')
 }
 </script>
 

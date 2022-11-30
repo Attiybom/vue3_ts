@@ -7,8 +7,8 @@
       ref="formRef"
       status-icon
     >
-      <el-form-item label="账号" prop="username">
-        <el-input v-model="account.username" />
+      <el-form-item label="账号" prop="name">
+        <el-input v-model="account.name" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input
@@ -22,17 +22,17 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormRules, ElForm } from 'element-plus'
 import { ElMessage } from 'element-plus'
-import useLoginStore from "@/stores/login/login"
-import { accountLoginRequest } from '@/services/login/login'
+import useLoginStore from "@/stores/login/login";
+import type { FormRules, ElForm } from 'element-plus'
+import type { IAccount } from '@/types';
 
-const account = reactive({
-  username: '',
+const account = reactive<IAccount>({
+  name: '',
   password: ''
 })
 const accountRules: FormRules = {
-  username: [
+  name: [
     {
       required: true,
       message: '账号不能为空',
@@ -66,11 +66,10 @@ const accountLogin = () => {
   formRef.value?.validate((vaild) => {
     if (vaild) {
       // 获取请求所需要的数据
-      const name = account.username;
+      const name = account.name;
       const password = account.password;
-      // accountLoginRequest({ name, password }).then(res => {
-      //   console.log(res);
-      // })
+
+      // 调用store的action(发送网络请求)
       loginStore.accountLoginAction({
         name,
         password

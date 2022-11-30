@@ -22,4 +22,9 @@ const router = createRouter({
   ]
 })
 
+// 导航守卫
+// 逻辑判断： 是否已登录？ 跳转admin ： 跳转login
+router.beforeEach((to, from) => {
+  
+})
 export default router
