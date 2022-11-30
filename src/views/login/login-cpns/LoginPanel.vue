@@ -33,7 +33,7 @@
         <el-link type="primary">忘记密码</el-link>
 
       </div>
-      <el-button type="primary" class="w-[250px]" @click="onsubmit"
+      <el-button type="primary" class="w-[250px]" @click="handleLogin"
         >立即登录</el-button
       >
     </div>
@@ -41,19 +41,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import PanelAccount from "./PanelAccount.vue"
 import PanelPhone from "./PanelPhone.vue"
+import { localCache } from '@/utils/cache';
 
 const activeName = ref('account')
-const isRemPassword = ref(false)
-
+// 处理记住密码逻辑
+const isRemPassword = ref<boolean>( localCache.getCache('isRemPassword') ?? false)
+watch(isRemPassword, (newValue) => {
+  localCache.setCache('isRemPassword', newValue)
+})
 const panelAccountRef = ref<InstanceType<typeof PanelAccount>>()
 
-const onsubmit = () => {
+const handleLogin = () => {
   if (activeName.value === 'account') {
-    console.log('账号登录方式');
-    panelAccountRef.value?.accountLogin()
+    // console.log('账号登录方式');
+    panelAccountRef.value?.accountLogin(isRemPassword.value)
   } else {
     console.log('手机登录方式')
   }

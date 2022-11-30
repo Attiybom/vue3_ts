@@ -26,10 +26,12 @@ import { ElMessage } from 'element-plus'
 import useLoginStore from "@/stores/login/login";
 import type { FormRules, ElForm } from 'element-plus'
 import type { IAccount } from '@/types';
+import { USER_NAME, PASSWORD } from "@/global/constants"
+import { localCache } from '@/utils/cache';
 
 const account = reactive<IAccount>({
-  name: '',
-  password: ''
+  name: localCache.getCache(USER_NAME) ?? '',
+  password: localCache.getCache(PASSWORD) ?? ''
 })
 const accountRules: FormRules = {
   name: [
@@ -61,7 +63,7 @@ const accountRules: FormRules = {
 // 登录逻辑
 const formRef = ref<InstanceType<typeof ElForm>>();
 const loginStore = useLoginStore()
-const accountLogin = () => {
+const accountLogin = (isRemPassword:boolean) => {
   // console.log('accountLogin')
   formRef.value?.validate((vaild) => {
     if (vaild) {
@@ -73,6 +75,14 @@ const accountLogin = () => {
       loginStore.accountLoginAction({
         name,
         password
+      }).then(res => {
+        if (isRemPassword) {
+          localCache.setCache(USER_NAME, name);
+          localCache.setCache(PASSWORD, password);
+        } else {
+          localCache.removeCache(USER_NAME);
+          localCache.removeCache(PASSWORD);
+        }
       })
     } else {
       ElMessage({
