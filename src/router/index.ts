@@ -30,7 +30,7 @@ const router = createRouter({
 // 返回值 跳转的路径
 router.beforeEach((to, from) => {
   const token = localCache.getCache(LOGIN_TOKEN)
-  if (to.path === '/admin' && !token) {
+  if (to.path.startsWith('/admin') && !token) {
     return '/login'
   }
 })
