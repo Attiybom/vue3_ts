@@ -25,7 +25,7 @@
           </template>
 
           <template v-for="subitem in item.children" :key="subitem.id">
-            <el-menu-item :index="subitem.id + ''" >
+            <el-menu-item :index="subitem.id + ''" @click="handleItemClick(subitem)">
               {{ subitem.name }}
             </el-menu-item>
           </template>
@@ -36,9 +36,9 @@
 </template>
 
 <script setup lang="ts">
-
+import { useRouter } from 'vue-router';
 import useLoginStore from '@/stores/login/login'
-
+const router = useRouter()
 const props = defineProps({
   isCollapse: {
     type: Boolean,
@@ -50,7 +50,12 @@ const props = defineProps({
 const loginStore = useLoginStore()
 const menuData = loginStore.userMenus
 
-
+// 菜单项点击切换二级路由
+const handleItemClick = (subitem:any) => {
+  console.log(subitem.url);
+  const url = subitem.url;
+  // router.push(url)
+}
 
 </script>
 

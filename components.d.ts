@@ -34,7 +34,8 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
-    HeaderInfo: typeof import('./src/components/admin-header/cpns/HeaderInfo.vue')['default']
+    HeaderInfo: typeof import('./src/components/main-header/cpns/HeaderInfo.vue')['default']
+    MainHeader: typeof import('./src/components/main-header/MainHeader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
