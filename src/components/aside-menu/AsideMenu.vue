@@ -6,7 +6,7 @@
         alt=""
         class="w-[20px] h-[20px]"
       />
-      <p>后台管理系统</p>
+      <p v-show="!isCollapse" class="title">后台管理系统</p>
     </div>
     <el-menu
       default-active="2"
@@ -36,17 +36,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+
 import useLoginStore from '@/stores/login/login'
 
-const isCollapse = ref(false)
+const props = defineProps({
+  isCollapse: {
+    type: Boolean,
+    default: false
+  }
+})
+
+
 const loginStore = useLoginStore()
 const menuData = loginStore.userMenus
+
+
+
 </script>
 
 <style scoped>
 .aside-menu {
   color: aliceblue;
+}
+
+.title {
+  transition: all 0.3s ease;
 }
 
 .menu-header {

@@ -1,0 +1,57 @@
+<template>
+  <div class="header-info flex items-center">
+    <div class="icons w-[80px] flex items-center justify-around">
+      <el-icon><Connection /></el-icon>
+      <el-icon><ChatDotRound /></el-icon>
+      <el-icon><Search /></el-icon>
+    </div>
+    <div class="flex items-center justify-around ml-3">
+      <el-avatar
+        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+        size="small"
+      />
+      <div>
+        <el-dropdown class="ml-3">
+          <span class=" text-gray-50">
+            {{ userName }}
+            <el-icon>
+              <arrow-down />
+            </el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>个人资料</el-dropdown-item>
+              <el-dropdown-item>修改密码</el-dropdown-item>
+              <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import useLoginStore from '@/stores/login/login';
+import { LOGIN_TOKEN } from '@/global/constants';
+import { useRouter } from "vue-router"
+import { localCache } from '@/utils/cache';
+
+// 退出登录的逻辑
+const router = useRouter()
+const handleLogout = () => {
+  // 1.删除token
+  // 2.跳转login
+  localCache.removeCache(LOGIN_TOKEN);
+  router.push('/login')
+}
+const loginStore = useLoginStore();
+
+const userName = loginStore.userInfo.name
+
+</script>
+
+<style scoped>
+.header-info {
+}
+</style>

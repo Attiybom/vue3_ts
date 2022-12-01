@@ -1,33 +1,24 @@
 <script setup lang="ts">
 import AdminHeader from '@/components/admin-header/AdminHeader.vue';
 import AsideMenu from '@/components/aside-menu/AsideMenu.vue';
-// 退出登录的逻辑
-// import { LOGIN_TOKEN } from '@/global/constants';
-// import { useRouter } from "vue-router"
-// import { localCache } from '@/utils/cache';
+import { ref } from 'vue'
 
-// const router = useRouter()
-// const handleLogout = () => {
-//   // 1.删除token
-//   // 2.跳转login
-//   localCache.removeCache(LOGIN_TOKEN);
-//   router.push('/login')
-// }
+const isCollapse = ref(false)
+const handleFoldChange = (isFold:boolean) => {
+  isCollapse.value = isFold
+}
 
 </script>
 
 <template>
 
-
-    <!-- <el-button type="primary" size="default" @click="handleLogout">退出登录</el-button> -->
-
     <el-container class="box">
-      <el-aside width="200px"  >
-        <aside-menu />
+      <el-aside :width=" isCollapse ? '45px' : '200px'"  >
+        <aside-menu :is-collapse="isCollapse"  />
       </el-aside>
       <el-container>
         <el-header>
-          <admin-header />
+          <admin-header @fold-change="handleFoldChange" />
         </el-header>
         <el-main>Main</el-main>
       </el-container>
@@ -38,6 +29,10 @@ import AsideMenu from '@/components/aside-menu/AsideMenu.vue';
 .box {
   width: 100%;
   height: 100%;
+}
+
+.el-aside {
+  transition: all 0.3s ease;
 }
 .el-header {
   height: 45px;
