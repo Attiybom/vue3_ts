@@ -27,38 +27,32 @@ const router = createRouter({
 
 // 动态路由
 // 根据菜单权限决定是否注册路由
-
-// /main/system/user
-// AsideMenu.vue:55 /main/system/department
-// AsideMenu.vue:55 /main/system/menu
-// AsideMenu.vue:55 /main/system/role
-
-const CHildxxx = [
-  {
-    path: '/main/analysis/overview',
-    component: () => import('@/views/main/analysis/overview/Overview.vue')
-  },
-  {
-    path: '/main/analysis/dashboard',
-    component: () => import('@/views/main/system/user/User.vue')
-  },
-  {
-    path: '/main/system/user',
-    component: () => import('@/views/main/system/user/User.vue')
-  },
-  {
-    path: '/main/system/department',
-    component: () => import('@/views/main/system/department/Department.vue')
-  },
-  {
-    path: '/main/system/menu',
-    component: () => import('@/views/main/system/menu/Menu.vue')
-  },
-  {
-    path: '/main/system/role',
-    component: () => import('@/views/main/system/role/Role.vue')
-  }
-]
+// const asyncRoutes = [
+//   {
+//     path: '/main/analysis/overview',
+//     component: () => import('@/views/main/analysis/overview/Overview.vue')
+//   },
+//   {
+//     path: '/main/analysis/dashboard',
+//     component: () => import('@/views/main/system/user/User.vue')
+//   },
+//   {
+//     path: '/main/system/user',
+//     component: () => import('@/views/main/system/user/User.vue')
+//   },
+//   {
+//     path: '/main/system/department',
+//     component: () => import('@/views/main/system/department/Department.vue')
+//   },
+//   {
+//     path: '/main/system/menu',
+//     component: () => import('@/views/main/system/menu/Menu.vue')
+//   },
+//   {
+//     path: '/main/system/role',
+//     component: () => import('@/views/main/system/role/Role.vue')
+//   }
+// ]
 // router.addRoute();
 
 // 导航守卫

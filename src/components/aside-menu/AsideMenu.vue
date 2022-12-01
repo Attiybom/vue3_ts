@@ -52,9 +52,9 @@ const menuData = loginStore.userMenus
 
 // 菜单项点击切换二级路由
 const handleItemClick = (subitem:any) => {
-  console.log(subitem.url);
+  // console.log(subitem.url);
   const url = subitem.url;
-  // router.push(url)
+  router.push(url)
 }
 
 </script>
