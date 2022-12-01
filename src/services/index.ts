@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { BASE_URL, TIME_OUT } from './request.config'
+import { LOGIN_TOKEN } from '@/global/constants'
+import { localCache } from '@/utils/cache'
 
 const requestInstance = axios.create({
   baseURL: BASE_URL,
@@ -7,9 +9,14 @@ const requestInstance = axios.create({
 })
 
 // 添加请求拦截器
+const token = localCache.getCache(LOGIN_TOKEN)
 requestInstance.interceptors.request.use(
   function (config) {
-    // 在发送请求之前做些什么
+    // 在请求头里的授权，添加token
+    if (token && config.headers) {
+      // 类型缩小
+      config.headers.Authorization = 'Bearer ' + token
+    }
     return config
   },
   function (error) {
