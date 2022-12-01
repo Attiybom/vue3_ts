@@ -14,8 +14,8 @@ const router = createRouter({
       component: () => import('../views/login/Login.vue')
     },
     {
-      path: '/admin',
-      component: () => import('../views/admin/Admin.vue')
+      path: '/main',
+      component: () => import('../views/main/Main.vue')
     },
     {
       path: '/:pathMatch(.*)*',
@@ -30,7 +30,7 @@ const router = createRouter({
 // 返回值 跳转的路径
 router.beforeEach((to, from) => {
   const token = localCache.getCache(LOGIN_TOKEN)
-  if (to.path.startsWith('/admin') && !token) {
+  if (to.path.startsWith('/main') && !token) {
     return '/login'
   }
 })

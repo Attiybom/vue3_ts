@@ -42,7 +42,7 @@ const useLoginStore = defineStore('login', {
       localCache.setCache(USER_MENU, userMenu)
 
       // 跳转页面
-      router.push('/admin')
+      router.push('/main')
     }
   }
 })

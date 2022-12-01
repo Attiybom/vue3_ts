@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-header">
+  <div class="main-header">
     <div class="menu-icon flex items-center">
       <el-icon size="24px" @click="foldClick" class=" cursor-pointer">
         <component :is="isFold ? 'Expand' : 'Fold'"></component>
@@ -28,7 +28,7 @@ const foldClick = () => {
 </script>
 
 <style scoped>
-.admin-header{
+.main-header{
   width: 100%;
   color: aliceblue;
   @apply flex items-center

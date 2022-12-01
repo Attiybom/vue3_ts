@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AdminHeader from '@/components/admin-header/AdminHeader.vue';
+import MainHeader from '@/components/main-header/MainHeader.vue';
 import AsideMenu from '@/components/aside-menu/AsideMenu.vue';
 import { ref } from 'vue'
 
@@ -18,7 +18,7 @@ const handleFoldChange = (isFold:boolean) => {
       </el-aside>
       <el-container>
         <el-header>
-          <admin-header @fold-change="handleFoldChange" />
+          <main-header @fold-change="handleFoldChange" />
         </el-header>
         <el-main>Main</el-main>
       </el-container>
