@@ -62,7 +62,7 @@
       <el-button type="default" icon="Refresh" @click="handleRefresh"
         >重置</el-button
       >
-      <el-button type="primary" icon="Search" class="mr-3">查询</el-button>
+      <el-button type="primary" icon="Search" class="mr-3" @click="handleQuery">查询</el-button>
     </div>
   </div>
 </template>
@@ -82,6 +82,10 @@ const searchForm = reactive({
 const handleRefresh = () => {
   console.log('hello')
   formRef.value?.resetFields()
+}
+
+const handleQuery = () => {
+  console.log('handleQuery');
 }
 </script>
 
