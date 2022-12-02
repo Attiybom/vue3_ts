@@ -11,12 +11,12 @@
     <el-menu
       :default-active="defaultActive"
       :collapse="isCollapse"
-      background-color="#010212"
       text-color="#FFFFFF"
+      active-text-color="#FF6C37"
     >
 
       <template v-for="item in menuData" :key="item.id">
-        <el-sub-menu popper-offset="0" :index="item.id + ''">
+        <el-sub-menu :index="item.id + ''">
           <template #title>
             <el-icon>
               <component :is="item.icon.split('-icon-')[1]"></component>
@@ -85,8 +85,11 @@ const defaultActive = computed(() => {
   background-color: transparent;
 }
 
+:deep(.el-menu) {
+  background-color: transparent;
+}
 :deep(.el-menu-item:hover) {
-  color: darkorange;
+  color: #FF6C37;
   background-color: aliceblue;
 }
 </style>

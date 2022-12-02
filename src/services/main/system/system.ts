@@ -1,8 +1,5 @@
 import requestInstance from '../../index'
 
-export function postUserListData() {
-  return requestInstance.post('/users/list', {
-    offset: 0,
-    size: 10
-  })
+export function postUserListData(queryInfo:any) {
+  return requestInstance.post('/users/list', queryInfo)
 }
