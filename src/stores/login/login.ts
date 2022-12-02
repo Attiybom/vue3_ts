@@ -63,7 +63,13 @@ const useLoginStore = defineStore('login', {
         // 动态路由 >> 根据菜单信息，动态注册路由
         const roleRoutes = mapMenusToRoutes(userMenus)
         roleRoutes.forEach((route) => router.addRoute('main', route))
+        // console.log(roleRoutes)
       }
+    },
+    removeLocalCacheAction() {
+      localCache.removeCache(LOGIN_TOKEN)
+      localCache.removeCache(USER_INFO)
+      localCache.removeCache(USER_MENU)
     }
   }
 })

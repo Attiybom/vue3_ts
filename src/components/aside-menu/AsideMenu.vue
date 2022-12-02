@@ -9,7 +9,7 @@
       <p v-show="!isCollapse" class="title">后台管理系统</p>
     </div>
     <el-menu
-      default-active="2"
+      :default-active="defaultActive"
       unique-opened
       collapse-transition
       :collapse="isCollapse"
@@ -25,7 +25,7 @@
           </template>
 
           <template v-for="subitem in item.children" :key="subitem.id">
-            <el-menu-item :index="subitem.id + ''" @click="handleItemClick(subitem)">
+            <el-menu-item :index="subitem.url + ''" @click="handleItemClick(subitem)">
               {{ subitem.name }}
             </el-menu-item>
           </template>
@@ -36,8 +36,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { ref,computed } from 'vue';
+import { useRouter,useRoute } from 'vue-router';
 import useLoginStore from '@/stores/login/login'
+// import { mapPathToMenu } from "@/utils/map-menus"
 const router = useRouter()
 const props = defineProps({
   isCollapse: {
@@ -56,6 +58,17 @@ const handleItemClick = (subitem:any) => {
   const url = subitem.url;
   router.push(url)
 }
+
+// 页面刷新,仍然保持刷新前的页面
+const route = useRoute()
+// console.log(route);
+// console.log(route.path);
+// const pathMenu = mapPathToMenu(route.path, menuData)
+// console.log(pathMenu);
+
+const defaultActive = computed(() => {
+  return (route.path + '')
+})
 
 </script>
 

@@ -33,22 +33,20 @@
 
 <script setup lang="ts">
 import useLoginStore from '@/stores/login/login';
-import { LOGIN_TOKEN } from '@/global/constants';
 import { useRouter } from "vue-router"
-import { localCache } from '@/utils/cache';
+
+
+const loginStore = useLoginStore();
+const userName = loginStore.userInfo.name
 
 // 退出登录的逻辑
 const router = useRouter()
 const handleLogout = () => {
-  // 1.删除token
+  // 1.清除本地缓存
   // 2.跳转login
-  localCache.removeCache(LOGIN_TOKEN);
+  loginStore.removeLocalCacheAction()
   router.push('/login')
 }
-const loginStore = useLoginStore();
-
-const userName = loginStore.userInfo.name
-
 </script>
 
 <style scoped>

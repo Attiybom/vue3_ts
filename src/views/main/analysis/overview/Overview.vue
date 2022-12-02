@@ -1,5 +1,5 @@
 <template>
-  <div class="not-found">
+  <div class="overview">
     overview
   </div>
 </template>
@@ -9,7 +9,7 @@
 </script>
 
 <style scoped>
-.not-found{
+.overview{
 
 }
 </style>
