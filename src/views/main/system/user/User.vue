@@ -2,7 +2,7 @@
   <div class="user">
     <Search />
     <el-divider />
-    <Content class="  rounded" />
+    <Content class="content  rounded" />
   </div>
 </template>
 
@@ -11,4 +11,7 @@ import Search from './cpns/Search.vue';
 import Content from './cpns/Content.vue';
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
