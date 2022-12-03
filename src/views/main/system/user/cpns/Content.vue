@@ -50,7 +50,7 @@
       <!-- 按钮 -->
       <el-table-column align="center" label="操作" width="140">
         <template #default="{row}">
-          <el-button type="primary" text size="small" @click="">编辑</el-button>
+          <el-button type="primary" text size="small" @click="handleUpdateClick(row)">编辑</el-button>
           <el-button type="danger" text size="small" @click="handleDeleteClick(row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -76,13 +76,14 @@ import {ref} from "vue"
 import useSystemStore from '@/stores/main/system/system'
 import { storeToRefs } from 'pinia'
 import {formatDate} from "@/utils/formatDate"
+import { toast } from "@/utils/toast"
 
 const systemStore = useSystemStore()
 const pageSize = ref(10)//分页组件的一次展示多少条数据
 const currentPage = ref(1);//分页组件的当前页面
 
 // 发送事件
-const emit = defineEmits(['createUserClick'])
+const emit = defineEmits(['createUserClick', 'updateUserClick'])
 
 // 进入页面，请求数据
 fetchUserListData()
@@ -119,12 +120,18 @@ function fetchUserListData(formData:any = {}) {
 
 // 删除数据
 const handleDeleteClick = (id: number) => {
-  systemStore.deleteUserListAction(id)
+  systemStore.deleteUserListAction(id).then(res => {
+    toast('删除成功！')
+  })
 }
-
 // 新建用户按钮点击
 const handleCreateUser = () => {
   emit('createUserClick')
+}
+
+// 编辑用户资料
+const handleUpdateClick = (row:any) => {
+  emit('updateUserClick', row)
 }
 
 

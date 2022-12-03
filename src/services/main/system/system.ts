@@ -11,3 +11,7 @@ export function deleteUserListData(id: number) {
 export function createUser(data: any) {
   return requestInstance.post('/users', data)
 }
+
+export function updateUser(id: number, data: any) {
+  return requestInstance.patch('/users/' + id, data)
+}
