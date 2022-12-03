@@ -25,12 +25,20 @@
         </el-form>
         <el-form :model="form" ref="formRef" label-width="80px">
           <el-form-item label="选择角色:" prop="roleId">
-            <el-input placeholder="请输入角色" v-model="form.roleId"></el-input>
+            <el-select v-model="form.roleId" placeholder="请选择角色" clearable style="width: 100%;">
+              <template v-for="item in roleList" :key="item.id">
+                <el-option :label="item.name" :value="item.id" />
+              </template>
+            </el-select>
           </el-form-item>
         </el-form>
         <el-form :model="form" ref="formRef" label-width="80px">
-          <el-form-item label="选择部门:" prop="department">
-            <el-input placeholder="请输入部门" v-model="form.department"></el-input>
+          <el-form-item label="选择部门:" prop="departmentId">
+            <el-select v-model="form.departmentId" placeholder="请选择部门" clearable style="width: 100%;">
+              <template v-for="item in departmentList" :key="item.id">
+                <el-option :label="item.name" :value="item.id" />
+              </template>
+            </el-select>
           </el-form-item>
         </el-form>
       </div>
@@ -39,7 +47,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">
+          <el-button type="primary" @click="handleCreateUser">
             确定
           </el-button>
         </span>
@@ -51,6 +59,11 @@
 <script setup lang="ts">
 import type { ElForm } from 'element-plus';
 import { ref, reactive } from 'vue'
+import useMainStore from "@/stores/main"
+import useSystemStore from '@/stores/main/system/system';
+
+const mainstore = useMainStore();
+const systemStore = useSystemStore()
 const dialogVisible = ref(true)
 
 const openModal = () => {
@@ -68,10 +81,18 @@ const form = reactive({
   password: "",
   cellphone: "",
   roleId: "",
-  department:""
+  departmentId:""
 })
 
+// 获取角色与部分不数据
+const {roleList, departmentList} = mainstore
 
+// 创建新用户
+const handleCreateUser = () => {
+  systemStore.createUserAction(form);
+
+  dialogVisible.value = false
+}
 
 defineExpose({
   openModal,

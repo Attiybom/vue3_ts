@@ -7,3 +7,7 @@ export function postUserListData(queryInfo:any) {
 export function deleteUserListData(id: number) {
   return requestInstance.delete('/users/' + id)
 }
+
+export function createUser(data: any) {
+  return requestInstance.post('/users', data)
+}

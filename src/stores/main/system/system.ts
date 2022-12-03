@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import type { ISystemState } from './type'
 import {
   postUserListData,
-  deleteUserListData
+  deleteUserListData,
+  createUser
 } from '@/services/main/system/system'
 
 const useSystemStore = defineStore('system', {
@@ -23,6 +24,13 @@ const useSystemStore = defineStore('system', {
 
       // 重新请求数据
       this.getUserListAction({ offset: 0, size: 10 })
+    },
+    async createUserAction(data: any) {
+      const createUserRes = await createUser(data)
+      console.log(createUserRes)
+      
+      // 重新请求数据
+      this.getUserListAction({ offset: 0, size: 10 });
     }
   }
 })

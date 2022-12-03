@@ -10,6 +10,9 @@ import mapMenusToRoutes from '@/utils/map-menus'
 import router from '@/router'
 import { LOGIN_TOKEN, USER_INFO, USER_MENU } from '@/global/constants'
 import { toast } from '@/utils/toast'
+import useMainStore from '../main'
+
+
 
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
@@ -47,12 +50,18 @@ const useLoginStore = defineStore('login', {
       const roleRoutes = mapMenusToRoutes(userMenus)
       roleRoutes.forEach((route) => router.addRoute('main', route))
 
+      // 发送请求，部门和角色数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
+
       // 跳转页面
       router.push('/main')
 
       // 弹出消息
       toast('登录成功')
     },
+
+    // 用户点击刷新页面时候，加载本地数据
     loadLocalCacheAction() {
       const token = localCache.getCache(LOGIN_TOKEN)
       const userInfo = localCache.getCache(USER_INFO)
@@ -67,8 +76,11 @@ const useLoginStore = defineStore('login', {
         // 动态路由 >> 根据菜单信息，动态注册路由
         const roleRoutes = mapMenusToRoutes(userMenus)
         roleRoutes.forEach((route) => router.addRoute('main', route))
-        // console.log(roleRoutes)
       }
+
+      // 再次发送请求部门和角色数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
     },
     removeLocalCacheAction() {
       localCache.removeCache(LOGIN_TOKEN)
