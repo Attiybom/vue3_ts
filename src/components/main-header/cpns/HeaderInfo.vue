@@ -21,7 +21,7 @@
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item>个人资料</el-dropdown-item>
-              <el-dropdown-item>修改密码</el-dropdown-item>
+              <el-dropdown-item @click="handleUpdatePassword">修改密码</el-dropdown-item>
               <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import useLoginStore from '@/stores/login/login';
 import { useRouter } from "vue-router"
-
+import { toast } from '@/utils/toast';
 
 const loginStore = useLoginStore();
 const userName = loginStore.userInfo.name
@@ -46,6 +46,11 @@ const handleLogout = () => {
   // 2.跳转login
   loginStore.removeLocalCacheAction()
   router.push('/login')
+  toast('退出登录成功')
+}
+
+const handleUpdatePassword = () => {
+  toast('修改密码成功')
 }
 </script>
 

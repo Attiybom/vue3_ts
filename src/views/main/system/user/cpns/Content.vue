@@ -1,11 +1,13 @@
 <template>
   <div class="content">
+    <!-- 新建用户 -->
     <div class="head flex items-center justify-between mb-3">
       <h2>用户列表</h2>
-      <el-button type="primary" @click="">新建用户</el-button>
+      <el-button type="primary" @click="handleCreateUser">新建用户</el-button>
     </div>
     <!-- <el-divider /> -->
 
+    <!-- 表单 -->
     <el-table :data="userList" border lazy style="width: 100%" size="small" class=" rounded">
       <el-table-column align="center" type="selection" width="40" />
       <el-table-column align="center" type="index" label="序号" width="55" />
@@ -47,13 +49,14 @@
       </el-table-column>
       <!-- 按钮 -->
       <el-table-column align="center" label="操作" width="140">
-        <template #default="scope">
+        <template #default="{row}">
           <el-button type="primary" text size="small" @click="">编辑</el-button>
-          <el-button type="danger" text size="small" @click="">删除</el-button>
+          <el-button type="danger" text size="small" @click="handleDeleteClick(row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
+    <!-- 分页 -->
     <div class=" bg-white flex items-center justify-center rounded">
       <el-pagination
       v-model:current-page="currentPage"
@@ -78,6 +81,9 @@ const systemStore = useSystemStore()
 const pageSize = ref(10)//分页组件的一次展示多少条数据
 const currentPage = ref(1);//分页组件的当前页面
 
+// 发送事件
+const emit = defineEmits(['createUserClick'])
+
 // 进入页面，请求数据
 fetchUserListData()
 
@@ -92,24 +98,39 @@ const handleChangeEnable = (row:any) => {
 
 // 分页
 const handleSizeChange = () => {
-  console.log('handleSizeChange');
+  fetchUserListData()
 }
 
 const handleCurrentChange = () => {
   fetchUserListData()
-  console.log('handleCurrentChange');
 }
 
-// 用户列表相关请求
-function fetchUserListData() {
+// 用户列表数据相关请求
+function fetchUserListData(formData:any = {}) {
   const size = pageSize.value;
   const offset = (currentPage.value - 1) * size;
 
   systemStore.getUserListAction({
     offset,
-    size
+    size,
+    ...formData
   }) //发送网络请求
 }
+
+// 删除数据
+const handleDeleteClick = (id: number) => {
+  systemStore.deleteUserListAction(id)
+}
+
+// 新建用户按钮点击
+const handleCreateUser = () => {
+  emit('createUserClick')
+}
+
+
+defineExpose({
+  fetchUserListData
+})
 
 </script>
 

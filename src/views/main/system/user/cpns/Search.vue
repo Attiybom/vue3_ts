@@ -70,22 +70,28 @@
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
+
+// 发送事件
+const emit =  defineEmits(['queryClick', 'refreshClick'])
+
 const formRef = ref<InstanceType<typeof ElForm>>()
 const searchForm = reactive({
   name: '',
   realname: '',
   cellphone: '',
-  enable: 1,
-  createAt: []
+  enable: '',
+  createAt: ''
 })
 
 const handleRefresh = () => {
-  console.log('hello')
+  // 搜索框本身的重置
   formRef.value?.resetFields()
+  // 表单数据的重置
+  emit('refreshClick')
 }
 
 const handleQuery = () => {
-  console.log('handleQuery');
+  emit('queryClick', searchForm)
 }
 </script>
 

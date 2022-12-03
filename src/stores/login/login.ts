@@ -9,6 +9,7 @@ import { localCache } from '@/utils/cache'
 import mapMenusToRoutes from '@/utils/map-menus'
 import router from '@/router'
 import { LOGIN_TOKEN, USER_INFO, USER_MENU } from '@/global/constants'
+import { toast } from '@/utils/toast'
 
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
@@ -48,6 +49,9 @@ const useLoginStore = defineStore('login', {
 
       // 跳转页面
       router.push('/main')
+
+      // 弹出消息
+      toast('登录成功')
     },
     loadLocalCacheAction() {
       const token = localCache.getCache(LOGIN_TOKEN)
