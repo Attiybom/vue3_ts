@@ -12,7 +12,7 @@
             <el-form-item :label="item.label" :prop="item.prop">
               <template v-if="item.type === 'input'">
                 <el-input
-                  placeholder="请输入部门名称"
+                  :placeholder="item.placeholder"
                   v-model="searchForm.name"
                 />
               </template>
@@ -60,7 +60,7 @@ const emit = defineEmits(['queryClick', 'refreshClick'])
 
 const formRef = ref<InstanceType<typeof ElForm>>()
 const initForm: any = {}
-for (const item of searchConfig.formItems) {
+for (const item of prop.searchConfig.formItems) {
   initForm[item.prop] = item.initValue ?? ''
 }
 const searchForm = reactive(initForm)

@@ -44,6 +44,7 @@ declare module '@vue/runtime-core' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     HeaderInfo: typeof import('./src/components/main-header/cpns/HeaderInfo.vue')['default']
     MainHeader: typeof import('./src/components/main-header/MainHeader.vue')['default']
+    PageContent: typeof import('./src/components/page-content/PageContent.vue')['default']
     PageSearch: typeof import('./src/components/page-search/PageSearch.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
