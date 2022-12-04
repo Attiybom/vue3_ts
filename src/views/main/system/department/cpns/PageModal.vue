@@ -24,33 +24,12 @@
             ></el-input>
           </el-form-item>
         </el-form>
+
         <el-form :model="form" ref="formRef" label-width="80px">
-          <el-form-item label="上级部门:" prop="parentId">
-            <el-input
-              placeholder="请输入上级部门"
+          <el-form-item label="选择部门:" prop="parentId">
+            <el-select
               v-model="form.parentId"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-        <!-- <el-form :model="form" ref="formRef" label-width="80px">
-          <el-form-item label="选择角色:" prop="roleId">
-            <el-select
-              v-model="form.roleId"
-              placeholder="请选择角色"
-              clearable
-              style="width: 100%"
-            >
-              <template v-for="item in roleList" :key="item.id">
-                <el-option :label="item.name" :value="item.id" />
-              </template>
-            </el-select>
-          </el-form-item>
-        </el-form>
-        <el-form :model="form" ref="formRef" label-width="80px">
-          <el-form-item label="选择部门:" prop="departmentId">
-            <el-select
-              v-model="form.departmentId"
-              placeholder="请选择部门"
+              placeholder="请输入上级部门"
               clearable
               style="width: 100%"
             >
@@ -59,7 +38,7 @@
               </template>
             </el-select>
           </el-form-item>
-        </el-form> -->
+        </el-form>
       </div>
 
       <!-- 按钮 -->
@@ -118,7 +97,7 @@ const closeModal = () => {
 }
 
 // 获取角色与部门数据
-const { roleList, departmentList } = mainstore
+const { departmentList } = mainstore
 
 // 创建/修改用户
 const handleConfirmClick = () => {
