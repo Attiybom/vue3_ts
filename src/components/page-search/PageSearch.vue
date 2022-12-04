@@ -46,7 +46,14 @@
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
-import searchConfig from '@/views/main/system/department/config/search.config';
+
+interface IProps {
+  searchConfig: {
+    formItems: any[]
+  }
+}
+
+const prop = defineProps<IProps>()
 
 // 发送事件
 const emit = defineEmits(['queryClick', 'refreshClick'])
