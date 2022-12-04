@@ -13,36 +13,46 @@
       @update-page-click="handleUpdateClick"
     >
       <template #leader="row">
-        <span  class=" text-red-600">{{ row.leader }}</span>
+        <span class="text-red-600">{{ row.leader }}</span>
       </template>
     </page-content>
-    <page-modal ref="pageModalRef" />
+    <page-modal :modal-config="modalConfigRef" ref="pageModalRef" />
   </div>
 </template>
 
 <script setup lang="ts">
 import PageSearch from '@/components/page-search/PageSearch.vue'
 import PageContent from '@/components/page-content/PageContent.vue'
-import PageModal from './cpns/PageModal.vue'
-import { ref } from 'vue'
+import PageModal from '@/components/page-modal/PageModal.vue'
+
 import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
+import modalConfig from './config/modal.config'
 
-const pageContentRef = ref<InstanceType<typeof PageContent>>()
-const pageModalRef = ref<InstanceType<typeof PageModal>>()
-const handleQueryClick = (formData: any) => {
-  pageContentRef.value?.fetchPageListData(formData)
-}
-const handleRefreshClick = () => {
-  pageContentRef.value?.fetchPageListData()
-}
-const handleCreateClick = () => {
-  pageModalRef.value?.openModal()
-}
-const handleUpdateClick = (data: any) => {
-  pageModalRef.value?.openModal(false, data)
-  // console.log(data);
-}
+import usePageContent from '@/hooks/usePageContent'
+import usePageModal from '@/hooks/usePageModal'
+
+import useMainStore from '@/stores/main'
+import { computed } from 'vue'
+
+const modalConfigRef = computed(() => {
+  const mainStore = useMainStore()
+  const departments = mainStore.departmentList.map((item) => {
+    return { label: item.name, value: item.id }
+  })
+
+  modalConfig.formData.forEach((item: any) => {
+    if (item.prop === 'parentId') {
+      item.options.push(...departments)
+    }
+  })
+
+  return modalConfig
+})
+
+const {pageContentRef,handleQueryClick, handleRefreshClick}  = usePageContent()
+const { pageModalRef, handleCreateClick, handleUpdateClick } = usePageModal()
+
 </script>
 
 <style scoped></style>
