@@ -1,7 +1,7 @@
-import useMainStore from '@/stores/main'
+// import useMainStore from '@/stores/main'
 
-const mainstore = useMainStore()
-const { departmentList } = mainstore
+// const mainstore = useMainStore()
+// const { departmentList } = mainstore
 
 const modalConfig = {
   pageName: 'department',
@@ -29,7 +29,7 @@ const modalConfig = {
       label: '上级部门：',
       prop: 'parentId',
       placeholder: '请选择上级部门',
-      options: [],
+      options: []
       // optionC: departmentList
     }
   ]

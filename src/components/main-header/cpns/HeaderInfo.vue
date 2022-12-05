@@ -12,7 +12,7 @@
       />
       <div>
         <el-dropdown class="ml-3">
-          <span class=" text-gray-50">
+          <span class="text-gray-50">
             {{ userName }}
             <el-icon>
               <arrow-down />
@@ -21,8 +21,12 @@
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item>个人资料</el-dropdown-item>
-              <el-dropdown-item @click="handleUpdatePassword">修改密码</el-dropdown-item>
-              <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
+              <el-dropdown-item @click="handleUpdatePassword"
+                >修改密码</el-dropdown-item
+              >
+              <el-dropdown-item @click="handleLogout"
+                >退出登录</el-dropdown-item
+              >
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -32,11 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import useLoginStore from '@/stores/login/login';
-import { useRouter } from "vue-router"
-import { toast } from '@/utils/toast';
+import useLoginStore from '@/stores/login/login'
+import { useRouter } from 'vue-router'
+import { toast } from '@/utils/toast'
 
-const loginStore = useLoginStore();
+const loginStore = useLoginStore()
 const userName = loginStore.userInfo.name
 
 // 退出登录的逻辑

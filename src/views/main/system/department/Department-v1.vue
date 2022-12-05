@@ -37,5 +37,4 @@ const handleUpdateClick = (data: any) => {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -31,17 +31,21 @@ const useSystemStore = defineStore('system', {
       const deleteRes = await deleteUserListData(id)
       // 重新请求数据
       this.getUserListAction({ offset: 0, size: 10 })
+
+      return deleteRes
     },
     async createUserAction(data: any) {
       const createUserRes = await createUser(data)
       // 重新请求数据
       this.getUserListAction({ offset: 0, size: 10 })
+      return createUserRes
     },
     async updateUserAction(id: number, data: any) {
       const updateRes = await updateUser(id, data)
-      console.log(updateRes)
+      // console.log(updateRes)
       // 重新请求数据
       this.getUserListAction({ offset: 0, size: 10 })
+      return updateRes
     },
 
     //
@@ -55,16 +59,20 @@ const useSystemStore = defineStore('system', {
       const deleteRes = await deletePageListData(pagename, id)
       // 重新请求数据
       this.getPageListAction(pagename, { offset: 0, size: 10 })
+      return deleteRes
     },
     async createPageAction(pagename: string, data: any) {
       const createPageRes = await createPageData(pagename, data)
       // 重新请求数据
       this.getPageListAction(pagename, { offset: 0, size: 10 })
+      return createPageRes
     },
     async updatePageAction(pagename: string, id: number, data: any) {
       const updateRes = await updatePageData(pagename, id, data)
       // 重新请求数据
       this.getPageListAction(pagename, { offset: 0, size: 10 })
+
+      return updateRes
     }
   }
 })

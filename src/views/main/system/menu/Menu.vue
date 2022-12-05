@@ -5,12 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import PageContent from '@/components/page-content/PageContent.vue';
-import contentConfig from './config/content.config';
+import PageContent from '@/components/page-content/PageContent.vue'
+import contentConfig from './config/content.config'
 </script>
 
 <style scoped>
-.user{
-
+.user {
 }
 </style>

@@ -20,58 +20,52 @@
       :row-key="contentConfig.childrenTree?.rowKey"
       :tree-props="contentConfig.childrenTree?.treeProps"
     >
-        <template v-for="item in contentConfig.listData" :key="item.prop">
-
-          <template v-if="item.type === 'selection'">
-            <el-table-column align="center" v-bind="item" />
-          </template>
-
-          <template v-else-if="item.type === 'timer'">
-            <el-table-column align="center" v-bind="item">
-              <template #default="{ row }">
-                {{ formatDate(row[item.prop]) }}
-              </template>
-            </el-table-column>
-          </template>
-
-          <template v-else-if="item.type === 'operation'">
-            <el-table-column align="center" v-bind="item">
-              <template #default="{ row }">
-                <el-button
-                  type="primary"
-                  text
-                  size="small"
-                  @click="handleUpdateClick(row)"
-                  >编辑</el-button
-                >
-                <el-button
-                  type="danger"
-                  text
-                  size="small"
-                  @click="handleDeleteClick(row)"
-                  >删除</el-button
-                >
-              </template>
-            </el-table-column>
-          </template>
-
-          <template v-else-if="item.type === 'custom'">
-            <el-table-column align="center" v-bind="item">
-              <template #default="{row}">
-                <slot :name="item.slotName" v-bind="row" />
-              </template>
-            </el-table-column>
-          </template>
-
-          <template v-else>
-            <el-table-column
-              align="center"
-              v-bind="item"
-            />
-          </template>
-
+      <template v-for="item in contentConfig.listData" :key="item.prop">
+        <template v-if="item.type === 'selection'">
+          <el-table-column align="center" v-bind="item" />
         </template>
 
+        <template v-else-if="item.type === 'timer'">
+          <el-table-column align="center" v-bind="item">
+            <template #default="{ row }">
+              {{ formatDate(row[item.prop]) }}
+            </template>
+          </el-table-column>
+        </template>
+
+        <template v-else-if="item.type === 'operation'">
+          <el-table-column align="center" v-bind="item">
+            <template #default="{ row }">
+              <el-button
+                type="primary"
+                text
+                size="small"
+                @click="handleUpdateClick(row)"
+                >编辑</el-button
+              >
+              <el-button
+                type="danger"
+                text
+                size="small"
+                @click="handleDeleteClick(row)"
+                >删除</el-button
+              >
+            </template>
+          </el-table-column>
+        </template>
+
+        <template v-else-if="item.type === 'custom'">
+          <el-table-column align="center" v-bind="item">
+            <template #default="{ row }">
+              <slot :name="item.slotName" v-bind="row" />
+            </template>
+          </el-table-column>
+        </template>
+
+        <template v-else>
+          <el-table-column align="center" v-bind="item" />
+        </template>
+      </template>
     </el-table>
 
     <!-- 分页 -->
@@ -102,12 +96,12 @@ const currentPage = ref(1) //分页组件的当前页面
 
 interface IProps {
   contentConfig: {
-    pageName:string,
+    pageName: string
     header?: {
       title: string
       btnTitle: string
-    },
-    listData?: any[],
+    }
+    listData?: any[]
     childrenTree?: any
   }
 }
@@ -145,10 +139,12 @@ function fetchPageListData(formData: any = {}) {
 }
 
 // 删除数据
-const handleDeleteClick = (row:any) => {
-  systemStore.deletePageListAction(props.contentConfig.pageName, row.id).then(() => {
-    toast('删除成功！')
-  })
+const handleDeleteClick = (row: any) => {
+  systemStore
+    .deletePageListAction(props.contentConfig.pageName, row.id)
+    .then(() => {
+      toast('删除成功！')
+    })
 }
 // 新建点击
 const handleCreateClick = () => {

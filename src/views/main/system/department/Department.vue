@@ -50,9 +50,9 @@ const modalConfigRef = computed(() => {
   return modalConfig
 })
 
-const {pageContentRef,handleQueryClick, handleRefreshClick}  = usePageContent()
+const { pageContentRef, handleQueryClick, handleRefreshClick } =
+  usePageContent()
 const { pageModalRef, handleCreateClick, handleUpdateClick } = usePageModal()
-
 </script>
 
 <style scoped></style>

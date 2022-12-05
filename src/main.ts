@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import "normalize.css"
+import 'normalize.css'
 
 import App from './App.vue'
 import router from './router'
@@ -20,6 +20,5 @@ loginStore.loadLocalCacheAction()
 
 app.use(router)
 app.use(registerIcons)
-
 
 app.mount('#app')

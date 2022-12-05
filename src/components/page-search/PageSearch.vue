@@ -65,7 +65,6 @@ for (const item of prop.searchConfig.formItems) {
 }
 const searchForm = reactive(initForm)
 
-
 const handleRefresh = () => {
   // 搜索框本身的重置
   formRef.value?.resetFields()

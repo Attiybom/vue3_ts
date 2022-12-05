@@ -12,8 +12,6 @@ import { LOGIN_TOKEN, USER_INFO, USER_MENU } from '@/global/constants'
 import { toast } from '@/utils/toast'
 import useMainStore from '../main'
 
-
-
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
     token: '',

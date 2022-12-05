@@ -8,7 +8,7 @@
         <div class="flex">
           <el-input />
           <el-button
-            class='ml-2'
+            class="ml-2"
             type="primary"
             size="default"
             @click="handlePhoneEmail"

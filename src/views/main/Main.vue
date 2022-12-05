@@ -1,30 +1,28 @@
 <script setup lang="ts">
-import MainHeader from '@/components/main-header/MainHeader.vue';
-import AsideMenu from '@/components/aside-menu/AsideMenu.vue';
+import MainHeader from '@/components/main-header/MainHeader.vue'
+import AsideMenu from '@/components/aside-menu/AsideMenu.vue'
 import { ref } from 'vue'
 
 const isCollapse = ref(false)
-const handleFoldChange = (isFold:boolean) => {
+const handleFoldChange = (isFold: boolean) => {
   isCollapse.value = isFold
 }
-
 </script>
 
 <template>
-
-    <el-container class="box">
-      <el-aside :width=" isCollapse ? '45px' : '200px'"  >
-        <aside-menu :is-collapse="isCollapse"  />
-      </el-aside>
-      <el-container>
-        <el-header>
-          <main-header @fold-change="handleFoldChange" />
-        </el-header>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
-      </el-container>
+  <el-container class="box">
+    <el-aside :width="isCollapse ? '45px' : '200px'">
+      <aside-menu :is-collapse="isCollapse" />
+    </el-aside>
+    <el-container>
+      <el-header>
+        <main-header @fold-change="handleFoldChange" />
+      </el-header>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
+  </el-container>
 </template>
 
 <style scoped>
@@ -38,7 +36,7 @@ const handleFoldChange = (isFold:boolean) => {
 }
 .el-header {
   height: 45px;
-  @apply flex items-center
+  @apply flex items-center;
 }
 .el-main {
   color: aliceblue;

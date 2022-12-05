@@ -12,7 +12,11 @@
       @create-page-click="handleCreateClick"
       @update-page-click="handleUpdateClick"
     />
-    <PageModal ref="pageModalRef" :modal-config="modalConfig" :tree-check-data="treeCheckData">
+    <PageModal
+      ref="pageModalRef"
+      :modal-config="modalConfig"
+      :tree-check-data="treeCheckData"
+    >
       <template #menulist>
         <el-tree
           :data="menuList"

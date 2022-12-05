@@ -14,7 +14,6 @@
       text-color="#FFFFFF"
       active-text-color="#FF6C37"
     >
-
       <template v-for="item in menuData" :key="item.id">
         <el-sub-menu :index="item.id + ''">
           <template #title>
@@ -25,7 +24,10 @@
           </template>
 
           <template v-for="subitem in item.children" :key="subitem.id">
-            <el-menu-item :index="subitem.url + ''" @click="handleItemClick(subitem)">
+            <el-menu-item
+              :index="subitem.url + ''"
+              @click="handleItemClick(subitem)"
+            >
               {{ subitem.name }}
             </el-menu-item>
           </template>
@@ -36,26 +38,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref,computed } from 'vue';
-import { useRouter,useRoute } from 'vue-router';
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import useLoginStore from '@/stores/login/login'
 // import { mapPathToMenu } from "@/utils/map-menus"
 const router = useRouter()
-const props = defineProps({
+defineProps({
   isCollapse: {
     type: Boolean,
     default: false
   }
 })
 
-
 const loginStore = useLoginStore()
 const menuData = loginStore.userMenus
 
 // 菜单项点击切换二级路由
-const handleItemClick = (subitem:any) => {
+const handleItemClick = (subitem: any) => {
   // console.log(subitem.url);
-  const url = subitem.url;
+  const url = subitem.url
   router.push(url)
 }
 
@@ -67,9 +68,8 @@ const route = useRoute()
 // console.log(pathMenu);
 
 const defaultActive = computed(() => {
-  return (route.path + '')
+  return route.path + ''
 })
-
 </script>
 
 <style scoped>
@@ -89,7 +89,7 @@ const defaultActive = computed(() => {
   background-color: transparent;
 }
 :deep(.el-menu-item:hover) {
-  color: #FF6C37;
+  color: #ff6c37;
   background-color: aliceblue;
 }
 </style>

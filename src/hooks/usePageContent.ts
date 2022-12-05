@@ -10,7 +10,6 @@ function usePageContent() {
     pageContentRef.value?.fetchPageListData()
   }
 
-
   return {
     pageContentRef,
     handleQueryClick,

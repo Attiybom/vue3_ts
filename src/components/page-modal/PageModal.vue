@@ -69,7 +69,7 @@ interface IProps {
       updateTitle: string
     }
     formData: any[]
-  },
+  }
   treeCheckData?: any
 }
 
@@ -95,14 +95,16 @@ const openModal = (isCreate: boolean = true, updateData?: any) => {
   if (!isCreate && updateData) {
     isCreateRef.value = false
     for (const key in form) {
-      form[key] = updateData[key]//如果是编辑操作，则进行数据回显
+      form[key] = updateData[key] //如果是编辑操作，则进行数据回显
     }
     updateInfo.value = updateData
   } else {
     isCreateRef.value = true
     for (const key in form) {
-      const item = props.modalConfig.formData.find((item) => item.prop === key) as any
-      form[key] = item ? item.initValue : ''//新建操作，数据初始化
+      const item = props.modalConfig.formData.find(
+        (item) => item.prop === key
+      ) as any
+      form[key] = item ? item.initValue : '' //新建操作，数据初始化
     }
     updateInfo.value = null
   }
@@ -113,10 +115,10 @@ const closeModal = () => {
 
 // 创建/修改用户
 const handleConfirmClick = () => {
-
-  let info = form;
-  if (props.treeCheckData) {//树形控件数据
-    info = {...form, ...(props.treeCheckData)}
+  let info = form
+  if (props.treeCheckData) {
+    //树形控件数据
+    info = { ...form, ...props.treeCheckData }
   }
 
   if (!isCreateRef.value && updateInfo.value) {

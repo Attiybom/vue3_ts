@@ -1,4 +1,4 @@
-import useMainStore from '@/stores/main'
+// import useMainStore from '@/stores/main'
 
 const modalConfig = {
   pageName: 'menu',
@@ -20,7 +20,7 @@ const modalConfig = {
       prop: 'intro',
       placeholder: '请输入角色介绍',
       initValue: ''
-    },
+    }
   ]
 }
 

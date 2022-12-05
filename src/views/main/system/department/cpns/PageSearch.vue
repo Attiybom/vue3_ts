@@ -42,7 +42,9 @@
       <el-button type="default" icon="Refresh" @click="handleRefresh"
         >重置</el-button
       >
-      <el-button type="primary" icon="Search" class="mr-3" @click="handleQuery">查询</el-button>
+      <el-button type="primary" icon="Search" class="mr-3" @click="handleQuery"
+        >查询</el-button
+      >
     </div>
   </div>
 </template>
@@ -52,7 +54,7 @@ import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
 
 // 发送事件
-const emit =  defineEmits(['queryClick', 'refreshClick'])
+const emit = defineEmits(['queryClick', 'refreshClick'])
 
 const formRef = ref<InstanceType<typeof ElForm>>()
 const searchForm = reactive({

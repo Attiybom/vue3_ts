@@ -60,7 +60,7 @@ const router = createRouter({
 // 逻辑判断：进入主控台(admin), 判断是否已登录？ 跳转admin ： 跳转login
 // 参数: to => 要跳转的路径 ； from => 从哪里跳转
 // 返回值 跳转的路径
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
   const token = localCache.getCache(LOGIN_TOKEN)
   if (to.path.startsWith('/main') && !token) {
     return '/login'

@@ -1,15 +1,10 @@
 <template>
-  <div class="overview">
-    overview
-  </div>
+  <div class="overview">overview</div>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
-.overview{
-
+.overview {
 }
 </style>
