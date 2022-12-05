@@ -1,4 +1,9 @@
 const searchConfig = {
+  /*
+    "name": "",
+    "intro": "",
+    "menuList": []
+  */
   formItems: [
     {
       type: 'input',

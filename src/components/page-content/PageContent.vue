@@ -17,6 +17,8 @@
       style="width: 100%"
       size="small"
       class="rounded"
+      :row-key="contentConfig.childrenTree?.rowKey"
+      :tree-props="contentConfig.childrenTree?.treeProps"
     >
         <template v-for="item in contentConfig.listData" :key="item.prop">
 
@@ -61,7 +63,7 @@
             </el-table-column>
           </template>
 
-          <template v-else="item.type === 'normal'">
+          <template v-else>
             <el-table-column
               align="center"
               v-bind="item"
@@ -105,7 +107,8 @@ interface IProps {
       title: string
       btnTitle: string
     },
-    listData?: any[]
+    listData?: any[],
+    childrenTree?: any
   }
 }
 const props = defineProps<IProps>()

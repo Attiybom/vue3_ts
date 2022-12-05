@@ -8,3 +8,7 @@ export function postRoleList() {
 export function postDepartmentList() {
   return requestInstance.post('/department/list')
 }
+
+export function postMenuList() {
+  return requestInstance.post('/menu/list')
+}
