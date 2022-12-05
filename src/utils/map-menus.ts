@@ -80,9 +80,20 @@ export function mapPathToBreadCrumb(path: string, userMenus: any[]) {
   }
 }
 
-/*
-拿到第二个
-再拿到过滤后路由数组的第一个
+// 树形控件映射id
+export function mapMenuListToIds(menuList: any[]) {
+  const ids: number[] = []
 
+  function recurseGetId(menus: any[]) {
+    for (const item of menus) {
+      if (item.children) {
+        recurseGetId(item.children)
+      } else {
+        ids.push(item.id)
+      }
+    }
+  }
+  recurseGetId(menuList)
 
-*/
+  return ids
+}

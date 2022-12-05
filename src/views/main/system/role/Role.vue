@@ -19,6 +19,7 @@
     >
       <template #menulist>
         <el-tree
+          ref="treeRef"
           :data="menuList"
           :props="{
             label: 'name',
@@ -49,7 +50,10 @@ import usePageModal from '@/hooks/usePageModal'
 // 树形控件相关
 import useMainStore from '@/stores/main'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
+import type { ElTree } from 'element-plus'
+import { mapMenuListToIds } from '@/utils/map-menus'
+const treeRef = ref<InstanceType<typeof ElTree>>()
 const mainStore = useMainStore()
 const { menuList } = storeToRefs(mainStore)
 
@@ -57,13 +61,29 @@ const { menuList } = storeToRefs(mainStore)
 const treeCheckData = ref({})
 const handleMenuListCheck = (data1: any, data2: any) => {
   // console.log(data1, data2)
-  treeCheckData.value = [...data2.checkedKeys, ...data2.halfCheckedKeys]
+  const menuList = [...data2.checkedKeys, ...data2.halfCheckedKeys]
+  treeCheckData.value = { menuList }
 }
 
 // 逻辑按键相关
 const { pageContentRef, handleQueryClick, handleRefreshClick } =
   usePageContent()
-const { pageModalRef, handleCreateClick, handleUpdateClick } = usePageModal()
+const { pageModalRef, handleCreateClick, handleUpdateClick } = usePageModal(
+  createCallback,
+  updateCallback
+)
+
+// 树形控件的数据回显
+function createCallback() {
+  console.log('test')
+}
+function updateCallback(data: any) {
+  // console.log({ ...data })
+  nextTick(() => {
+    const menuIds = mapMenuListToIds(data.menuList)
+    treeRef.value?.setCheckedKeys(menuIds)
+  })
+}
 </script>
 
 <style scoped>
