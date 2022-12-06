@@ -97,3 +97,21 @@ export function mapMenuListToIds(menuList: any[]) {
 
   return ids
 }
+
+// 菜单映射获取按钮权限数组
+export function mapMenuToPermission(menuList: any[]) {
+  const permissionArr: string[] = []
+
+  function recurseGetPermission(menus: any[]) {
+    for (const item of menus) {
+      if (item.type === 3) {
+        permissionArr.push(item.permission)
+      } else {
+        recurseGetPermission(item.children ?? [])
+      }
+    }
+  }
+  recurseGetPermission(menuList)
+
+  return permissionArr
+}

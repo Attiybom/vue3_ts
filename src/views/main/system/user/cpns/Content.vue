@@ -3,7 +3,9 @@
     <!-- 新建用户 -->
     <div class="head flex items-center justify-between mb-3">
       <h2>用户列表</h2>
-      <el-button type="primary" @click="handleCreateUser">新建用户</el-button>
+      <el-button type="primary" @click="handleCreateUser" v-if="hasCreateAuth"
+        >新建用户</el-button
+      >
     </div>
     <!-- <el-divider /> -->
 
@@ -62,6 +64,7 @@
             text
             size="small"
             @click="handleUpdateClick(row)"
+            v-if="hasUpdateAuth"
             >编辑</el-button
           >
           <el-button
@@ -69,6 +72,7 @@
             text
             size="small"
             @click="handleDeleteClick(row.id)"
+            v-if="hasDeleteAuth"
             >删除</el-button
           >
         </template>
@@ -96,6 +100,7 @@ import useSystemStore from '@/stores/main/system/system'
 import { storeToRefs } from 'pinia'
 import { formatDate } from '@/utils/formatDate'
 import { toast } from '@/utils/toast'
+import usePermissions from '@/hooks/usePermissions'
 
 const systemStore = useSystemStore()
 const pageSize = ref(10) //分页组件的一次展示多少条数据
@@ -103,6 +108,12 @@ const currentPage = ref(1) //分页组件的当前页面
 
 // 发送事件
 const emit = defineEmits(['createUserClick', 'updateUserClick'])
+
+// 按钮权限控制
+const hasCreateAuth = usePermissions(`users:create`)
+const hasUpdateAuth = usePermissions(`users:update`)
+const hasQuertAuth = usePermissions(`users:query`)
+const hasDeleteAuth = usePermissions(`users:delete`)
 
 // 进入页面，请求数据
 fetchUserListData()
@@ -127,6 +138,8 @@ const handleCurrentChange = () => {
 
 // 用户列表数据相关请求
 function fetchUserListData(formData: any = {}) {
+  if (!hasQuertAuth) return
+
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
 

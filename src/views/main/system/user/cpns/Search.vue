@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search" v-if="hasQuertAuth">
     <el-form
       :model="searchForm"
       label-position="right"
@@ -72,9 +72,13 @@
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
+import usePermissions from '@/hooks/usePermissions';
 
 // 发送事件
 const emit = defineEmits(['queryClick', 'refreshClick'])
+
+// 按钮权限控制
+const hasQuertAuth = usePermissions(`users:query`)
 
 const formRef = ref<InstanceType<typeof ElForm>>()
 const searchForm = reactive({

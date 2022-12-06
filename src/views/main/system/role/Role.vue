@@ -75,7 +75,9 @@ const { pageModalRef, handleCreateClick, handleUpdateClick } = usePageModal(
 
 // 树形控件的数据回显
 function createCallback() {
-  console.log('test')
+  nextTick(() => {
+    treeRef.value?.setCheckedKeys([])
+  })
 }
 function updateCallback(data: any) {
   // console.log({ ...data })
@@ -86,7 +88,4 @@ function updateCallback(data: any) {
 }
 </script>
 
-<style scoped>
-.user {
-}
-</style>
+<style scoped></style>

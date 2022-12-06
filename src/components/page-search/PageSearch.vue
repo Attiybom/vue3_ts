@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search" v-if="hasQueryAuth">
     <el-form
       :model="searchForm"
       label-position="right"
@@ -46,14 +46,17 @@
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
+import usePermissions from '@/hooks/usePermissions'
 
 interface IProps {
   searchConfig: {
+    pageName: string
     formItems: any[]
   }
 }
 
 const prop = defineProps<IProps>()
+const hasQueryAuth = usePermissions(`${prop.searchConfig.pageName}:query`)
 
 // 发送事件
 const emit = defineEmits(['queryClick', 'refreshClick'])

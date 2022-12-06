@@ -3,9 +3,12 @@
     <!-- 新建用户 -->
     <div class="head flex items-center justify-between mb-3">
       <h2>{{ contentConfig.header?.title ?? '数据列表' }}</h2>
-      <el-button type="primary" @click="handleCreateClick">{{
-        contentConfig.header?.btnTitle ?? '新建数据'
-      }}</el-button>
+      <el-button
+        v-if="hasCreateAuth"
+        type="primary"
+        @click="handleCreateClick"
+        >{{ contentConfig.header?.btnTitle ?? '新建数据' }}</el-button
+      >
     </div>
     <!-- <el-divider /> -->
 
@@ -41,6 +44,7 @@
                 text
                 size="small"
                 @click="handleUpdateClick(row)"
+                v-if="hasUpdateAuth"
                 >编辑</el-button
               >
               <el-button
@@ -48,6 +52,7 @@
                 text
                 size="small"
                 @click="handleDeleteClick(row)"
+                v-if="hasDeleteAuth"
                 >删除</el-button
               >
             </template>
@@ -76,8 +81,8 @@
         :page-sizes="[10, 30, 50]"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageTotalCount"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+        @update:page-size="handleSizeChange"
+        @update:current-page="handleCurrentChange"
       />
     </div>
   </div>
@@ -89,10 +94,7 @@ import useSystemStore from '@/stores/main/system/system'
 import { storeToRefs } from 'pinia'
 import { formatDate } from '@/utils/formatDate'
 import { toast } from '@/utils/toast'
-
-const systemStore = useSystemStore()
-const pageSize = ref(10) //分页组件的一次展示多少条数据
-const currentPage = ref(1) //分页组件的当前页面
+import usePermissions from '@/hooks/usePermissions'
 
 interface IProps {
   contentConfig: {
@@ -106,6 +108,29 @@ interface IProps {
   }
 }
 const props = defineProps<IProps>()
+
+const systemStore = useSystemStore()
+const pageSize = ref(10) //分页组件的一次展示多少条数据
+const currentPage = ref(1) //分页组件的当前页面
+
+systemStore.$onAction(({ name, after }) => {
+  after(() => {
+    const actionsNameArr = [
+      'deletePageListAction',
+      'createPageAction',
+      'updatePageAction'
+    ]
+    if (actionsNameArr.includes(name)) {
+      currentPage.value = 1
+    }
+  })
+})
+
+// 按钮权限控制
+const hasQueryAuth = usePermissions(`${props.contentConfig.pageName}:query`)
+const hasCreateAuth = usePermissions(`${props.contentConfig.pageName}:create`)
+const hasUpdateAuth = usePermissions(`${props.contentConfig.pageName}:update`)
+const hasDeleteAuth = usePermissions(`${props.contentConfig.pageName}:delete`)
 
 // 发送事件
 const emit = defineEmits(['createPageClick', 'updatePageClick'])
@@ -128,6 +153,8 @@ const handleCurrentChange = () => {
 
 // 用户列表数据相关请求
 function fetchPageListData(formData: any = {}) {
+  if (!hasQueryAuth) return
+
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
 

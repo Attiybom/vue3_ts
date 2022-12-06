@@ -1,4 +1,5 @@
 const searchConfig = {
+  pageName: 'menu',
   /*
     "name": "",
     "intro": "",

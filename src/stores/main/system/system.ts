@@ -10,6 +10,7 @@ import {
   createPageData,
   updatePageData
 } from '@/services/main/system/system'
+import useMainStore from '@/stores/main'
 
 const useSystemStore = defineStore('system', {
   state: (): ISystemState => ({
@@ -48,7 +49,7 @@ const useSystemStore = defineStore('system', {
       return updateRes
     },
 
-    //
+    // page-action
     async getPageListAction(pagename: string, pageInfo: any) {
       const pageRes = await postPageListData(pagename, pageInfo)
       const { list, totalCount } = pageRes.data
@@ -59,18 +60,32 @@ const useSystemStore = defineStore('system', {
       const deleteRes = await deletePageListData(pagename, id)
       // 重新请求数据
       this.getPageListAction(pagename, { offset: 0, size: 10 })
+
+      // 数据发生变化，重新请求数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
+
       return deleteRes
     },
     async createPageAction(pagename: string, data: any) {
       const createPageRes = await createPageData(pagename, data)
       // 重新请求数据
       this.getPageListAction(pagename, { offset: 0, size: 10 })
+
+      // 数据发生变化，重新请求数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
+
       return createPageRes
     },
     async updatePageAction(pagename: string, id: number, data: any) {
       const updateRes = await updatePageData(pagename, id, data)
       // 重新请求数据
       this.getPageListAction(pagename, { offset: 0, size: 10 })
+
+      // 数据发生变化，重新请求数据
+      const mainStore = useMainStore()
+      mainStore.fetchEntireDataAction()
 
       return updateRes
     }
