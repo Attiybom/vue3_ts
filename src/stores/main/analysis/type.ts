@@ -9,4 +9,7 @@ export interface IGoodsAmount {
 
 export interface IAnalysisState {
   goodsAmountList: IGoodsAmount[]
+  categoryCount: any[]
+  categorySale: any[]
+  categoryFavor: any[]
 }

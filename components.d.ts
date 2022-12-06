@@ -8,7 +8,9 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AsideMenu: typeof import('./src/components/aside-menu/AsideMenu.vue')['default']
-    BaseEcharts: typeof import('./src/components/page-echarts/src/BaseEcharts.vue')['default']
+    BarEchart: typeof import('./src/components/page-echarts/src/BarEchart.vue')['default']
+    BaseEchart: typeof import('./src/components/page-echarts/src/BaseEchart.vue')['default']
+    BaseEcharts: typeof import('./src/components/page-echarts/src/BaseEchart.vue')['default']
     BreadCrumb: typeof import('./src/components/main-header/cpns/BreadCrumb.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
@@ -47,10 +49,13 @@ declare module '@vue/runtime-core' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
     HeaderInfo: typeof import('./src/components/main-header/cpns/HeaderInfo.vue')['default']
+    LineEchart: typeof import('./src/components/page-echarts/src/LineEchart.vue')['default']
     MainHeader: typeof import('./src/components/main-header/MainHeader.vue')['default']
     PageContent: typeof import('./src/components/page-content/PageContent.vue')['default']
     PageModal: typeof import('./src/components/page-modal/PageModal.vue')['default']
     PageSearch: typeof import('./src/components/page-search/PageSearch.vue')['default']
+    PieEchart: typeof import('./src/components/page-echarts/src/PieEchart.vue')['default']
+    RoseEchart: typeof import('./src/components/page-echarts/src/RoseEchart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
