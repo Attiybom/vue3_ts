@@ -72,7 +72,7 @@
 <script setup lang="ts">
 import type { ElForm } from 'element-plus'
 import { reactive, ref } from 'vue'
-import usePermissions from '@/hooks/usePermissions';
+import usePermissions from '@/hooks/usePermissions'
 
 // 发送事件
 const emit = defineEmits(['queryClick', 'refreshClick'])
